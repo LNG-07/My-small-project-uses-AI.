@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công cụ Rút gọn Link Miễn phí</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 15px 0 0 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-left: 5px solid #4CAF50;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .error-box {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #ffebee;
+            border-left: 5px solid #f44336;
+            border-radius: 4px;
+            text-align: left;
+            color: #c62828;
+        }
+        a {
+            color: #1e88e5;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>✂️ LinkShortener</h1>
+    <p class="subtitle">Biến những đường link dài ngoằng thành link ngắn gọn trong 1 giây</p>
+
+    <form method="POST">
+        <input type="text" name="url_input" placeholder="Dán link gốc vào đây (Ví dụ: https://google.com)..." value="{{ original_url if original_url else '' }}" required>
+        <button type="submit">Rút gọn ngay</button>
+    </form>
+
+    {% if short_url %}
+    <div class="result-box">
+        <p style="margin: 0 0 8px 0; color: #2e7d32; font-weight: bold;">🎉 Thành công rực rỡ!</p>
+        <p style="margin: 0;">Link rút gọn của bạn: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a></p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error-box">
+        <strong>Lỗi:</strong> {{ error }}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
