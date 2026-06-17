@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công cụ Rút gọn Link Miễn phí</title>
+    <title>Free Link Shortener Tool</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -93,23 +93,23 @@
 
 <div class="container">
     <h1>✂️ LinkShortener</h1>
-    <p class="subtitle">Biến những đường link dài ngoằng thành link ngắn gọn trong 1 giây</p>
+    <p class="subtitle">Transform long URLs into short links in 1 second</p>
 
     <form method="POST">
-        <input type="text" name="url_input" placeholder="Dán link gốc vào đây (Ví dụ: https://google.com)..." value="{{ original_url if original_url else '' }}" required>
-        <button type="submit">Rút gọn ngay</button>
+        <input type="text" name="url_input" placeholder="Paste original link here (Example: https://google.com)..." value="{{ original_url if original_url else '' }}" required>
+        <button type="submit">Shorten Now</button>
     </form>
 
     {% if short_url %}
     <div class="result-box">
-        <p style="margin: 0 0 8px 0; color: #2e7d32; font-weight: bold;">🎉 Thành công rực rỡ!</p>
-        <p style="margin: 0;">Link rút gọn của bạn: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a></p>
+        <p style="margin: 0 0 8px 0; color: #2e7d32; font-weight: bold;">🎉 Success!</p>
+        <p style="margin: 0;">Your shortened link: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a></p>
     </div>
     {% endif %}
 
     {% if error %}
     <div class="error-box">
-        <strong>Lỗi:</strong> {{ error }}
+        <strong>Error:</strong> {{ error }}
     </div>
     {% endif %}
 </div>

@@ -3,43 +3,43 @@ import requests
 
 app = Flask(__name__)
 
-# Hàm xử lý gọi API để rút gọn link
+# Function to handle API call to shorten URL
 def shorten_url(long_url):
-    # Sử dụng API miễn phí, không cần đăng ký tài khoản của TinyURL
+    # Using free API, no need to register TinyURL account
     api_url = f"https://tinyurl.com/api-create.php?url={long_url}"
     try:
         response = requests.get(api_url, timeout=10)
         if response.status_code == 200:
-            return response.text  # Trả về đường link đã rút gọn
+            return response.text  # Return shortened URL
         else:
-            return "Lỗi: Không thể kết nối tới server rút gọn."
+            return "Error: Unable to connect to shortening server."
     except Exception as e:
-        return f"Lỗi kết nối: {str(e)}"
+        return f"Connection error: {str(e)}"
 
-# Trang chủ của ứng dụng web
+# Home page of web application
 @app.route("/", methods=["GET", "POST"])
 def index():
     short_url = None
     original_url = None
     error_message = None
 
-    # Khi người dùng nhấn nút "Rút gọn" (gửi dữ liệu POST lên)
+    # When user clicks 'Shorten' button (sends POST data)
     if request.method == "POST":
         original_url = request.form.get("url_input").strip()
 
         if original_url:
-            # Gọi hàm rút gọn link ở trên
+            # Call the shorten URL function above
             result = shorten_url(original_url)
-            if "Lỗi" in result:
+            if "Error" in result:
                 error_message = result
             else:
                 short_url = result
         else:
-            error_message = "Vui lòng không để trống đường link!"
+            error_message = "Please do not leave the URL empty!"
 
-    # Trả về giao diện kèm theo các kết quả (nếu có)
+    # Return interface with results (if any)
     return render_template("index.html", short_url=short_url, original_url=original_url, error=error_message)
 
 if __name__ == "__main__":
-    # Chạy ứng dụng web ở chế độ Debug để dễ sửa lỗi
+    # Run web application in Debug mode for easy debugging
     app.run(debug=True)
